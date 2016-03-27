@@ -1,0 +1,39 @@
+div{
+	clear:both;
+}
+.container {
+	
+	
+	
+}
+
+.button {
+	border-style:solid;
+	border-width:2px;
+	border-radius:5px;
+	padding: 14px 20px;
+	font-weight:bold;
+	float:left;
+	font-family:sans-serif;
+	font-size:30px;
+	background-color:#ff9900;
+	color:white;
+
+}
+
+.button:hover{
+	background-color:black;
+	cursor:pointer;
+}
+
+
+.wrapper {
+	text-align: center;
+}
+
+
+
+
+
+
+
