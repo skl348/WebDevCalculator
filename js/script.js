@@ -88,18 +88,69 @@ function opClicked(e) {
 }
  
 
+
 function addNum(num) {
     var outputElt = document.getElementById('output');
     var outputVal = Number(outputElt.innerHTML);
- 
-    // add and replace
-    outputElt.innerHTML = outputVal + num;
+    
+    var result = outputVal + num;
+
+    setEltToVal(outputElt, result);
 }
  
 function subtractNum(num) {
     var outputElt = document.getElementById('output');
     var outputVal = Number(outputElt.innerHTML);
  
-    // subtract and replace
-    outputElt.innerHTML = outputVal - num;
+    var result = outputVal - num;
+
+    setEltToVal(outputElt, result);
+}
+
+// sets innerhtml of passed in element to passed in value
+function setEltToVal(elt, val) {
+
+    /*
+    var prevVal = Number(elt.innerHTML);
+    if (prevVal != val)
+    {
+        if (prevVal > val)
+
+    }
+    */
+    elt.innerHTML = val;
+
+    /* add random pic to some random location on page*/
+
+    var randX = Math.random() * documentWidth();
+    var randY = Math.random() * documentHeight();
+    console.log('(' + randX, randY + ')');
+
+    var elem = document.createElement("img");
+    elem.setAttribute("width", "150px");
+    elem.setAttribute("alt", "cat 0");
+    elem.src = "img/0.svg";
+    elem.style.cssText = 'position:absolute; top:' + randY + 'px; left:' + randX + 'px; z-index:0;';
+    document.body.appendChild(elem);
+}
+
+
+function documentHeight() {
+    return Math.max(
+        document.documentElement.clientHeight,
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight
+    );
+}
+
+function documentWidth() {
+    return Math.max(
+        document.documentElement.clientWidth,
+        document.body.scrollWidth,
+        document.documentElement.scrollWidth,
+        document.body.offsetWidth,
+        document.documentElement.offsetWidth
+    );
 }
