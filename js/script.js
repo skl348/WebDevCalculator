@@ -1,6 +1,9 @@
-
-
-var operator;
+// to make the clicking of minus html entity to work
+var minusSignStr = decodeHtml('&#x2212');
+// operation to perform
+var operator = '';
+// right operand of the operation 
+var rightOperand = '';
  
 var numbers = document.getElementsByClassName('num');
 var operators = document.getElementsByClassName('op');
@@ -26,26 +29,14 @@ function generateRandNum(minimum, maximum) {
  
 function numClicked(e) {
 
-    var num = Number(e.target.innerHTML);
+    // concat digit to rightOperand
+    rightOperand += e.target.innerHTML;
     console.log(e.target.innerHTML);
-    /*
+    console.log(rightOperand);
+    
     var outputElt = document.getElementById('output');
-    var outputVal = outputElt.innerHTML;
-    outputVal = Number(outputVal);
- 
-    if (operator === '-') {
-        console.log('subtract this number');
-        // we could just do the math here,
-        // but instead we are calling another function (below)
-        subtractNum(num, outputVal);
-    }
-    else if (operator === '+') {
-        console.log('add this number');
-        // we could just do the math here,
-        // but instead we are calling another function (below)
-        addNum(num, outputVal);
-    }
-    */
+    var outputVal = Number(outputElt.innerHTML);
+
 }
  
 // Event Listener when an item with the class operator is clicked
@@ -55,32 +46,60 @@ function opClicked(e) {
     var opStr = e.target.innerHTML;
     if (opStr != '=') {
         operator = opStr;
-        console.log('operator changed to:', operator);
+        console.log('operator changed to:(', operator,')');
     }
     
     // equal sign op pressed
     else {
+        // if op and operand selected, do calculation
+        if (operator != '' && rightOperand != '')
+        {
+            var num = Number(rightOperand);
+            if (operator === '+')
+            {
+                console.log("adding now");
+                addNum(num);
+            }
+
+            else if (operator === minusSignStr)
+            {
+                console.log("subtracting now");
+                subtractNum(num);
+            }
+
+
+        }
+        // reset operator & operand
+        operator = '';
+        rightOperand = '';
+
 
     }
 
     console.log('op is:', opStr);
 }
 
- 
- 
- 
-/** calculator methods are called from numClicked **/
-function addNum(num, outputVal) {
-    var outputElt = document.getElementById('output');
- 
-    // do +
-    outputElt.innerHTML = num + outputVal;
+ // to decode html entity 
+ // Source: http://stackoverflow.com/questions/7394748/whats-the-right-way-to-decode-a-string-that-has-special-html-entities-in-it
+ function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
 }
  
-// subtracts number from output
-function subtractNum(num, outputVal) {
+
+function addNum(num) {
     var outputElt = document.getElementById('output');
+    var outputVal = Number(outputElt.innerHTML);
  
-    // do -
+    // add and replace
+    outputElt.innerHTML = outputVal + num;
+}
+ 
+function subtractNum(num) {
+    var outputElt = document.getElementById('output');
+    var outputVal = Number(outputElt.innerHTML);
+ 
+    // subtract and replace
     outputElt.innerHTML = outputVal - num;
 }
