@@ -1,9 +1,12 @@
-div{
+
+body {
+	background-color:black;
+}
+
+div {
 	clear:both;
 }
 .container {
-	
-	
 	
 }
 
@@ -22,14 +25,12 @@ div{
 }
 
 .button:hover{
-	background-color:black;
+	background-color:#e68a00;
 	cursor:pointer;
 }
 
 
-.wrapper {
-	text-align: center;
-}
+
 
 
 
