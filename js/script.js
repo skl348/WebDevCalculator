@@ -7,6 +7,9 @@ var rightOperand = '';
  
 var numbers = document.getElementsByClassName('num');
 var operators = document.getElementsByClassName('op');
+
+// accounts for removing leftovers 
+var removeStartId = 0;
  
  
  
@@ -120,9 +123,10 @@ function addNum(num) {
             // remove num images (dogs)
             for (var i = 0; i < num; i++)
             {
-                var elem = document.getElementById("img" + i);
+                var elem = document.getElementById("img" + (i+removeStartId));
                 elem.remove();
             }
+            removeStartId += num;
         }
         else
         {
@@ -130,9 +134,11 @@ function addNum(num) {
             var numDogs = Math.abs(outputVal);
             for (var i = 0; i < numDogs; i++)
             {
-                var elem = document.getElementById("img" + i);
+                var elem = document.getElementById("img" + (i+removeStartId));
                 elem.remove();
             }
+            removeStartId = 0;
+
             if (result > 0)
             {
                 // (result) MORE CATS! id starts from 0
@@ -169,9 +175,11 @@ function subtractNum(num) {
             // remove num images (cats)
             for (var i = 0; i < num; i++)
             {
-                var elem = document.getElementById("img" + i);
+                var elem = document.getElementById("img" + (i+removeStartId));
                 elem.remove();
             }
+            removeStartId += num;
+
         }
         else
         {
@@ -179,9 +187,11 @@ function subtractNum(num) {
             var numCats = Math.abs(outputVal);
             for (var i = 0; i < numCats; i++)
             {
-                var elem = document.getElementById("img" + i);
+                var elem = document.getElementById("img" + (i+removeStartId));
                 elem.remove();
             }
+            removeStartId = 0;
+
             if (result < 0)
             {
                 // (result) MORE DOGS! id starts from 0
